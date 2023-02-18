@@ -1,7 +1,178 @@
-<html>
-	<head>
-	</head>
-	<body>
-		Project 1 here
-	</body>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="index.css" type="text/css" />
+    <title>CS184 Project 1 - Sofia Howard-Jimenez</title>
+  </head>
+  <body>
+    <div class="content-wrapper">
+      <h2>Cs184 Project 1 . . . rasterizer</h2>
+      <h1>Sofia howard-jimenez</h1>
+
+      <div class="overview-wrapper">
+        <h2>Overview</h2>
+        <p>
+          In this assignment I implemented a simple rasterizer with capabilities
+          for drawing triangles, supersampling, transforms, and texture mapping.
+          The result was a functional graphics renderer that was able to make
+          some pretty cool images!
+        </p>
+      </div>
+      <div class="text-wrapper">
+        <h2>Task 1</h2>
+        <p>
+          The first task of the project was to implement basic triangle
+          rasterization. In order to do this, I first found the minimum and
+          maximum x and y values out of the given three coordinates. These
+          values are important because they tell you the corners of the bounding
+          box for checking if a given pixel location is within the lines of the
+          triangle. I looped through the bounding box by using a double for loop
+          with x and y initialized to the minimum respective values. Within the
+          loops, I then found whether or not that point was inside the triangle
+          by performing the three line test, and if the point was inside the
+          triangle, would then call rasterize_point (which I later changed to
+          use fill_pixel) on that pixel.
+        </p>
+        <img src="./img/screenshot_2-17_22-14-34.png" alt="triangles" />
+        <p>
+          This algorithm is no worse than one that checks each sample within the
+          bounding box for a triangle because it is performing this algorithm.
+        </p>
+      </div>
+      <div class="text-wrapper">
+        <h2>Task 2</h2>
+        <p>
+          In order to implement supersampling, I updated
+          RasterizerImp::set_sample_rate(),
+          RasterizerImp::set_framebuffer_target(),
+          RasterizerImp::rasterize_triangle(), RasterizerImp::fill_pixel(), and
+          RasterizerImp::resolve_to_framebuffer().
+        </p>
+        <p>
+          First, I updated set_sample_rate() and set_framebuffer_target() to
+          allow for a sample_buffer that could be dynamically sized based off of
+          the width, height, and current sample_rate of the renderer. Then, in
+          rasterize_triangle, I added two additional for loops to add additional
+          sub-pixel points to the loop based off of the square root of the
+          sample rate. I also had to update fill_pixel to take in an additional
+          index so each entry in the sample buffer has their own index. I also
+          had to update resolve_to_framebuffer() as that is where the actual
+          averaging of the color values and supersampling takes place before the
+          pixel is drawn to the framebuffer.
+        </p>
+        <div class="row-container">
+          <div class="column">
+            <img src="./img/screenshot_2-17_22-17-2.png" alt="1sm" />
+            <p>sample rate = 1</p>
+          </div>
+          <div class="column">
+            <img src="./img/screenshot_2-17_22-17-4.png" alt="4sm" />
+            <p>sample rate = 4</p>
+          </div>
+          <div class="column">
+            <img src="./img/screenshot_2-17_22-17-6.png" alt="16sm" />
+            <p>sample rate = 16</p>
+          </div>
+        </div>
+        <p>
+          Supersampling is useful to reduce the prominence of "jaggies" in an
+          image and ultimately improve image quality. This was the most
+          difficult part of the project for me!
+        </p>
+      </div>
+      <div class="text-wrapper">
+        <h2>Task 3</h2>
+        <p>I made this robot do the wave :3</p>
+        <img src="./img/screenshot_2-16_23-32-44.png" alt="robot" />
+      </div>
+      <div class="text-wrapper">
+        <h2>Task 4</h2>
+        <p>
+          Barycentric coordinates allow us to calculate a point given three
+          coordinate values. An easy way to visualize this is to use triangle
+          color interpolation.
+        </p>
+        <div class="row-container">
+          <img src="./img/barycentric.png" alt="barycentric" />
+          <p class="caption">
+            As seen in the image to the left, each vertex of the triangle
+            represents a different color value, and using barycentric
+            coordinates, we can derive every other color as a different weighted
+            combination of the three vertices.
+          </p>
+          <img
+          src="./img/screenshot_2-17_20-10-17.png"
+          alt="barycentric circle"
+        />
+        </div>
+       
+      </div>
+      <div class="text-wrapper">
+        <h2>Task 5</h2>
+        <p>
+          Pixel sampling is implemented by looking up the position of the
+          texture as each pixel is being scanned. Sampling is important because
+          textures may not always map 1:1 from the texture space to the world
+          space.
+        </p>
+        <p>
+          In this project, I implemented nearest pixel sampling and bilinear
+          sampling:
+        </p>
+        <p>
+          Nearest Sampling uses the color of the texel closest to the pixel
+          center, whereas Bilinear Sampling samples the four nearest texels and
+          find the weighted average according to the distance between the point
+          and the texels.
+        </p>
+        <div class="row-container">
+            <div class="column">
+              <img src="./img/screenshot_2-17_20-11-0.png" alt="n1" class="img2"/>
+              <p>nearest sampling, sample rate = 1</p>
+            </div>
+            <div class="column">
+              <img src="./img/screenshot_2-17_20-11-1.png" alt="b1" class="img2"/>
+              <p>bilinear sampling, sample rate = 1</p>
+            </div>
+          </div>
+          <div class="row-container">
+            <div class="column">
+              <img src="./img/screenshot_2-17_20-11-34.png" alt="n16" class="img2"/>
+              <p>nearest sampling, sample rate = 16</p>
+            </div>
+            <div class="column">
+              <img src="./img/screenshot_2-17_20-11-40.png" alt="b16" class="img2"/>
+              <p>bilinear sampling, sample rate = 16</p>
+            </div>
+        </div>
+      
+    </div>
+    <div class="text-wrapper">
+      <h2>Task 6</h2>
+      <p>Level sampling allows us to look at texture spaces that may not have the same size as the world space. We can do this by using mipmaps, which we can think of as
+        pyramids of images in descending resolution.
+      </p>
+      <p>In order to determine the correct mipmap level, we can either sample from Level 0, the nearest Level, or use bilinear sampling on the two nearest levels </p>
+      <div class="row-container">
+        <div class="column">
+          <img src="./img/screenshot_2-17_23-3-46.png" alt="zl0pn" class="img2"/>
+          <p>l_zero, p_nearest</p>
+        </div>
+        <div class="column">
+          <img src="./img/screenshot_2-17_23-3-50.png" alt="zl0pl" class="img2"/>
+          <p>l_zero, p_linear</p>
+        </div>
+      </div>
+      <div class="row-container">
+        <div class="column">
+          <img src="./img/screenshot_2-17_23-3-54.png" alt="zlnpn" class="img2"/>
+          <p>nearest, p_nearest</p>
+        </div>
+        <div class="column">
+          <img src="./img/screenshot_2-17_23-3-54.png" alt="zlnpl" class="img2"/>
+          <p>l_nearest, p_linear</p>
+        </div>
+    </div>
+    </div>
+  </body>
 </html>

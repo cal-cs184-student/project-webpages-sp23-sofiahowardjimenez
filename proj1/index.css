@@ -1,0 +1,76 @@
+@import url('https://fonts.cdnfonts.com/css/valentine-romantic');
+@import url('https://fonts.cdnfonts.com/css/-165');
+
+body{
+    background: #DAE2F8;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to bottom, #D6A4A4, #DAE2F8);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to bottom, #D6A4A4, #DAE2F8); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+    color: #362419;
+    font-family:  Verdana, sans-serif;
+    display: flex;
+}
+
+h1 {
+    font-weight: 200;
+    font-family: 'More Than Life', sans-serif;
+                                                
+    font-size:90px; 
+    /* color: #22160f;    */
+    color: white;
+    text-align: center;                              
+}
+
+h2{
+    font-weight: 300;
+    font-family: 'Valentine Romantic', sans-serif;
+    
+}
+
+img{
+    width: 40%;
+    display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.column {
+    align-items: center;
+    text-align: center;
+}
+
+.content-wrapper{
+    padding:0px 30px;
+    height: 100%;
+}
+
+.row-container {
+    flex-direction: row;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 30px;
+}
+
+.overview-wrapper{
+    padding: 30px;
+    background-color: rgba(255,255,255,0.25);
+    margin: 30px 0px;
+}
+
+.text-wrapper {
+    padding: 30px;
+    background-color: rgba(255,255,255,0.25);
+    margin: 30px 0px;
+}
+
+.caption{
+    padding: 30px;
+}
+
+.img2 {
+   
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
