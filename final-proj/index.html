@@ -1,0 +1,98 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+
+  <body>
+    <h1>Cel-Shading and Non-Realistic Rendering</h1>
+    <div id="row">
+      <h3>Shaylan Dias</h3>
+      <h3>|</h3>
+      <h3>Josh Aubin</h3>
+      <h3>|</h3>
+      <h3>Andy Varela</h3>
+      <h3>|</h3>
+      <h3>Sofia Howard-Jimenez</h3>
+    </div>
+
+    <h1>Milestone Report</h1>
+    <h3>
+      Create a short webpage for your milestone report. This should be about 1
+      page long if printed. You should briefly summarize what you have
+      accomplished, preliminary results, reflect on progress relative to your
+      plan, and update your work plan as appropriate. You must submit this
+      milestone deliverable (and the final deliverable) on a persistent website
+      that you can choose to keep up after class if you wish to present this
+      work in your portfolio.
+    </h3>
+    <p>
+      So far, we have begun to implement cel-shading on top of our project 4
+      clothsim implementation by utilizing GLSL fragment shader code. We decided
+      to build off project 4 as it already has the shader implementation set up
+      for us and thus would only require us to add an additional GLSL fragment
+      shader to implement cel-shading for a given mesh. At this point, our
+      program is able to output a working version of cel-shading, but it still
+      requires some work to touch up the results and make it look more accurate
+      to our intended result.
+    </p>
+    <div id="row">
+      <div>
+        <img src="img/sphere-cel-shaded.png" id="figure" />
+      </div>
+      <div>
+        <img src="img/sphere-cloth-cel-shaded.png" id="figure" />
+      </div>
+    </div>
+    <p>
+      In order to implement our current results, we started with copying over
+      the code from the Phong fragment shader into our new cel-shading GLSL
+      fragment shader. We then calculated the light intensity as a float
+      representing the dot product between the light position and the normal of
+      the input vertex. We then set a number of bins to represent the discrete
+      color changes we want to have in our output–currently we are using 4–and
+      map the intensity value to one of those color bins. In this
+      implementation, we divided our bins into different intensity thresholds,
+      with the highest intensity range (from 0.95 to 1 since intensity is
+      normalized) being the brightest color bin and the lowest intensity range
+      making the darkest color bin. If the intensity is below the lowest
+      threshold we have chosen, we set that value to 0, which currently handles
+      the outline.
+    </p>
+    <div id="center">
+      <img src="img/code-snippet-checkpoint.png" width="98%" id="figure" />
+    </div>
+    <p>
+      Currently, we are trying to improve the results of our cel-shader, since
+      some of our current implementations create dark artifacts on our cloth. In
+      completing this write-up, we realized that to calculate the outline we
+      should use the camera position instead of the light position, and have
+      begun implementing the outlines this way. We are still trying to figure
+      out how to import new, more intricate scenes to test our implementation
+      on. We also want to be able to change the number of bins we are mapping
+      our colors to to create smoother shaded scenes. Finally, we want to be
+      able to change the color of the render, as right now we can only produce
+      shades of this salmon color.
+    </p>
+    <br />
+    <br />
+    <h3>link to presentation video</h3>
+    <a href="https://www.youtube.com/watch?v=ITi5Y5nIYPo">
+      https://www.youtube.com/watch?v=ITi5Y5nIYPo
+    </a>
+    <br />
+    <br />
+    <h3>link to presentation slides</h3>
+    <a
+      href="https://docs.google.com/presentation/d/1txk-c1_dMHPu_68cnryRE6NTeLDVIFvLpzZJ-GbiGOA/edit?usp=sharing"
+    >
+      https://docs.google.com/presentation/d/1txk-c1_dMHPu_68cnryRE6NTeLDVIFvLpzZJ-GbiGOA/edit?usp=sharing
+    </a>
+    <br />
+    <br />
+    <br />
+    <a href="https://ShaylanDias.github.io/cs184-cel-shading/index/index.html"
+      >https://ShaylanDias.github.io/cs184-cel-shading/index/index.html</a
+    >
+    <br />
+  </body>
+</html>

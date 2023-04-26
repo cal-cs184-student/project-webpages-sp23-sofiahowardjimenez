@@ -1,0 +1,86 @@
+html {
+    font-family: 'Verdana', sans-serif;
+    /* padding: 60px 25% 300px 25%;
+    background-color: #e0daee;*/
+    padding: 60px 10% 300px 10%;
+    background-color: white;
+  }
+
+
+  figcaption {
+    color: gray;
+    font-style: italic;
+    font-size: 14px;
+  }
+  
+  hr {
+    background-color: gray;
+  }
+
+  h1 {
+    
+  }
+
+  h2 {
+
+  }
+  
+  h3 {
+    font-size: 16px;
+    font-weight: 200;
+    font-style: italic;
+  }
+
+  
+  #figure {
+    /* border-style: solid;
+    border-color: white;
+    border-width: 2px;
+    border-radius: 5px; */
+    
+    margin-bottom: 10px;
+    box-shadow: 1px 1px 15px #CCCCCC;
+    width: 90%;
+  }
+  
+  #row {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    margin: auto;
+  }
+
+  #center {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+  }
+  #row-vert {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+  }
+  
+  code {
+    font-size: 14px;
+    color: #3700AB;
+    background-color: #F0EEFF;
+    border-radius: 3px;
+    padding: 0px 4px 0px 4px;
+  }
+
+  p {
+    font-size: 15px;
+    line-height: 140%;
+  }
+
+  a {
+    
+  }
